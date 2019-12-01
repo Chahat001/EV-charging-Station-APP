@@ -1,5 +1,6 @@
 ## Scenario: Add credit/debit card 
 ## Mockup : #18-Payment page
+## Assigned To : Kumar Swamy
 
 ```bash
 POST https://localhost:8080/api/v1/payment-method 
@@ -29,6 +30,7 @@ Fail response
 
 ## Scenario: Get single card details
 ## Mockup: TBA
+## Assigned To : Kumar Swamy
 
 ```bash
 GET https://localhost:8080/api/v1/payment-method/{paymentMethodId}
@@ -53,6 +55,7 @@ Fail response
 
 ## Scenario: Get multiple card details 
 ## Mockup: TBA
+## Assigned To : Kumar Swamy
 
 ```bash
 GET https://localhost:8080/api/v1/payment-methods/{userId}
