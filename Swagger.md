@@ -87,3 +87,93 @@ Fail response
 “message”: “Failed fetching payment methods. Please try after some time”,
 }
 ```
+
+
+## Scenario: Add Charge point
+## Mockup : TBA
+## Assigned To : Yucheng Zhang
+
+```bash
+POST https://localhost:8080/api/v1/charge-point 
+
+Request
+{
+“stationId”: 123,
+“chargePointIdentifier”: “A-1234”,
+“capacity”: 2020,
+“type”: “Slow/Fast”
+}
+
+Response
+Success response
+{
+“success”: “true”,
+ “message”: ”Added successfully”
+}
+
+Fail response
+{
+“success”: “false”,
+“message”: “Failed, please try after sometime”
+}
+```
+
+## Scenario: Get single charge point details
+## Mockup: TBA
+## Assigned To : Yucheng Zhang
+
+```bash
+GET https://localhost:8080/api/v1/charge-point/{chargePointId}
+
+Response:
+Success Response:
+{
+“stationId”: 123,
+“chargePointId”: 654849068,
+“chargePointIdentifier”: “A-1234”,
+“capacity”: 2020,
+“type”: “Slow/Fast”,
+“status”: “Active/Suspended”
+}
+
+Fail response
+{
+“success”: “false”,
+“message”: “Failed fetching charge point details. Please try after some time”
+}
+```
+
+## Scenario: Get all charge points for given statin Id 
+## Mockup: TBA
+## Assigned To : Yucheng Zhang
+
+```bash
+GET https://localhost:8080/api/v1/charge-points/{stationId}
+
+Response:
+Success Response:
+{
+“stationId”: 123,
+“chargePoints”:
+[{
+ “chargePointId”: 654849068,
+“chargePointIdentifier”: “A-1234”,
+“capacity”: 2020,
+“type”: “Fast”,
+“status”: “Active”
+},
+{
+“chargePointId”: 6943060,
+“chargePointIdentifier”: “A-3535”,
+“capacity”: 2020,
+“type”: “Slow”,
+“status”: “Suspended”
+}]
+}
+
+Fail response
+{
+“success”: “false”,
+“message”: “Failed fetching payment methods. Please try after some time”,
+}
+```
