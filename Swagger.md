@@ -1,8 +1,9 @@
-##Scenario: Add credit/debit card 
-##Mockup : #18-Payment page
+## Scenario: Add credit/debit card 
+## Mockup : #18-Payment page
 
 ```bash
 POST https://localhost:8080/api/v1/payment-method 
+
 Request
 {
 “userId”: 123,
@@ -11,12 +12,14 @@ Request
 “expiryMonth”: “Dec”, 
  “nameOnCard”: “Kumar Swamy”
 }
+
 Response
 Success response
 {
 “success”: “true”,
  “message”: ”Added successfully”
 }
+
 Fail response
 {
 “success”: “false”,
@@ -24,11 +27,12 @@ Fail response
 }
 ```
 
-##Scenario: Get single card details
-##Mockup: TBA
+## Scenario: Get single card details
+## Mockup: TBA
 
 ```bash
 GET https://localhost:8080/api/v1/payment-method/{paymentMethodId}
+
 Response:
 Success Response:
 {
@@ -39,6 +43,7 @@ Success Response:
 “expiryMonth”: “Dec”, 
  “nameOnCard”: “Kumar Swamy”
 }
+
 Fail response
 {
 “success”: “false”,
@@ -46,11 +51,12 @@ Fail response
 }
 ```
 
-##Scenario: Get multiple card details 
-Mockup: TBA
+## Scenario: Get multiple card details 
+## Mockup: TBA
 
 ```bash
 GET https://localhost:8080/api/v1/payment-methods/{userId}
+
 Response:
 Success Response:
 {
@@ -71,6 +77,7 @@ Success Response:
  “nameOnCard”: “Amit Dandawate”
 }]
 }
+
 Fail response
 {
 “success”: “false”,
