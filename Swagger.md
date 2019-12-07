@@ -91,7 +91,7 @@ Fail response
 
 ## Scenario: Add Charge point
 ## Mockup : TBA
-## Assigned To : Yucheng Zhang
+## Assigned To : Kumar Swamy
 
 ```bash
 POST https://localhost:8080/api/v1/charge-point 
@@ -120,7 +120,7 @@ Fail response
 
 ## Scenario: Get single charge point details
 ## Mockup: TBA
-## Assigned To : Yucheng Zhang
+## Assigned To : Kumar Swamy
 
 ```bash
 GET https://localhost:8080/api/v1/charge-point/{chargePointId}
@@ -145,7 +145,7 @@ Fail response
 
 ## Scenario: Get all charge points for given statin Id 
 ## Mockup: TBA
-## Assigned To : Yucheng Zhang
+## Assigned To : Kumar Swamy
 
 ```bash
 GET https://localhost:8080/api/v1/charge-points/{stationId}
