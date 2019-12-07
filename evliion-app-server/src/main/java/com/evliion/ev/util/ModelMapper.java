@@ -1,7 +1,9 @@
 package com.evliion.ev.util;
 
+import com.evliion.ev.model.Card;
 import com.evliion.ev.model.Poll;
 import com.evliion.ev.model.User;
+import com.evliion.ev.payload.CardResponse;
 import com.evliion.ev.payload.ChoiceResponse;
 import com.evliion.ev.payload.PollResponse;
 import com.evliion.ev.payload.UserSummary;
@@ -47,6 +49,18 @@ public class ModelMapper {
         pollResponse.setTotalVotes(totalVotes);
 
         return pollResponse;
+    }
+    
+    public static CardResponse mapCardToCardResponse(Card card) {
+    	CardResponse cardResponse = new CardResponse();
+    	cardResponse.setPaymentMethodId(card.getId());
+    	cardResponse.setCardNumber(card.getNumber());
+    	cardResponse.setNameOnCard(card.getName());
+    	cardResponse.setUserId(card.getUser().getId());
+    	cardResponse.setExpiryYear(card.getExpYear());
+    	cardResponse.setExpiryMonth(AppConstants.SHORT_MONTHS[card.getExpMonth()-1]);
+    	
+    	return cardResponse;
     }
 
 }
