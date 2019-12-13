@@ -37,41 +37,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
+import static org.junit.Assert.*;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // for restTemplate
 
-public class PollsApplicationTests {
+public class TransTest {
+
 	@Autowired
-	UserController userController;
-	
-	@Autowired
-    private TestRestTemplate restTemplate;
+	TransController transController;
 	
 	@Test
-	public void createVehicle(){
-		VehicleRequest v = new VehicleRequest();
-		v.setMake("Mahindra Electric");
-		v.setUser_id(1L);
-		v.setModel("Verito");
-		v.setModel_type("4-wheeler");
-		ApiResponse res = userController.postVehicle(v);
-	}
-
-	@Test
-	public void getVehicle(){
-
-		VehicleResponse v  = userController.getVehicle(1L);
-	}
-
-	@Test
-	public void getVehicles(){
-
-		UserVehicleResponse v  = userController.getVehicles(1L);
+	public void createTransaction()throws JSONException, ParseException, JsonParseException, JsonMappingException, IOException
+	{
+		String file = "createTrans.json";
+		ObjectMapper mapper = new ObjectMapper();
+		Transaction transaction = mapper.readValue(new File(file), Transaction.class);
+				
+		String apiResponse = transController.postTrans(transaction);
+		
+		JSONParser parser = new JSONParser();
+		JSONObject json = (JSONObject) parser.parse(apiResponse);
+		
+		
+		assertEquals("false", json.getAsString("success"));	
 	}
 	
-	
-	
-
-
-
 }

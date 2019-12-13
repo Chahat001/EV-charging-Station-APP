@@ -7,7 +7,7 @@ CREATE TABLE `users` (
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_users_username` (`username`),
+  UNIQUE KEY `uk_users_username` (`usern3ame`),
   UNIQUE KEY `uk_users_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -67,3 +67,15 @@ CREATE TABLE `votes` (
   CONSTRAINT `fk_votes_poll_id` FOREIGN KEY (`poll_id`) REFERENCES `polls` (`id`),
   CONSTRAINT `fk_votes_choice_id` FOREIGN KEY (`choice_id`) REFERENCES `choices` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `transactions` (
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `station_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `vehicle_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `trans_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `startTime` varchar(15) NOT NULL,
+  `endTime` varchar(40) NOT NULL,
+  `totalTime` varchar(100) NOT NULL,
+  PRIMARY KEY (`trans_id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

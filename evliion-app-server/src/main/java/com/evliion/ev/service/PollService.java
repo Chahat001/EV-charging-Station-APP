@@ -3,12 +3,10 @@ package com.evliion.ev.service;
 import com.evliion.ev.exception.BadRequestException;
 import com.evliion.ev.exception.ResourceNotFoundException;
 import com.evliion.ev.model.*;
-import com.evliion.ev.payload.PagedResponse;
-import com.evliion.ev.payload.PollRequest;
-import com.evliion.ev.payload.PollResponse;
-import com.evliion.ev.payload.VoteRequest;
+import com.evliion.ev.payload.*;
 import com.evliion.ev.repository.PollRepository;
 import com.evliion.ev.repository.UserRepository;
+import com.evliion.ev.repository.VehicleRepository;
 import com.evliion.ev.repository.VoteRepository;
 import com.evliion.ev.security.UserPrincipal;
 import com.evliion.ev.util.AppConstants;
@@ -42,6 +40,9 @@ public class PollService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(PollService.class);
 
@@ -271,5 +272,38 @@ public class PollService {
                 .collect(Collectors.toMap(User::getId, Function.identity()));
 
         return creatorMap;
+    }
+
+    public boolean createVehicle(VehicleRequest vehicleRequest){
+        try {
+            Vehicle vehicle = new Vehicle();
+            vehicle.setMake(vehicleRequest.getMake());
+            vehicle.setModel(vehicleRequest.getModel());
+            vehicle.setVehicle_type(vehicleRequest.getModel_type());
+            vehicle.setUserId(vehicleRequest.getUser_id());
+            vehicleRepository.save(vehicle);
+        }catch(Exception e){
+            logger.error("Error in saving vehicle", e);
+            return false;
+        }
+        return true;
+    }
+
+    public Vehicle getVehicle(Long id){
+        try {
+            return vehicleRepository.findById(id).get();
+        }catch(Exception e){
+            logger.error("error in reading vehicle info for id "+id, e);
+            return null;
+        }
+    }
+
+    public List<Vehicle> getVehiclesByUser(Long userId){
+        try {
+            return vehicleRepository.findByUserId(userId);
+        }catch(Exception e){
+            logger.error("error in reading vehicle info for id "+userId, e);
+            return null;
+        }
     }
 }
