@@ -1,25 +1,18 @@
 package com.evliion.ev.service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.evliion.ev.exception.ResourceNotFoundException;
 import com.evliion.ev.model.Card;
-import com.evliion.ev.model.Poll;
 import com.evliion.ev.model.User;
 import com.evliion.ev.payload.CardRequest;
 import com.evliion.ev.payload.CardResponse;
-import com.evliion.ev.payload.PollResponse;
 import com.evliion.ev.repository.CardRepository;
 import com.evliion.ev.repository.UserRepository;
 import com.evliion.ev.util.ModelMapper;
@@ -60,10 +53,9 @@ public class CardService {
 		
         List<Card> cards = cardRepository.findByUserId(userId);
 		
-		List<CardResponse> cardResponses  = cards.stream()
+		return cards.stream()
 				.map(card -> ModelMapper.mapCardToCardResponse(card))
 				.collect(Collectors.toList());
-		return cardResponses;
 				
 	}
 

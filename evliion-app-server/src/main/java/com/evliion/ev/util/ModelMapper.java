@@ -1,9 +1,11 @@
 package com.evliion.ev.util;
 
 import com.evliion.ev.model.Card;
+import com.evliion.ev.model.ChargePoint;
 import com.evliion.ev.model.Poll;
 import com.evliion.ev.model.User;
 import com.evliion.ev.payload.CardResponse;
+import com.evliion.ev.payload.ChargePointResponse;
 import com.evliion.ev.payload.ChoiceResponse;
 import com.evliion.ev.payload.PollResponse;
 import com.evliion.ev.payload.UserSummary;
@@ -63,4 +65,16 @@ public class ModelMapper {
     	return cardResponse;
     }
 
+    public static ChargePointResponse mapChargePointToChargePointResponse(ChargePoint chargePoint) {
+    	ChargePointResponse chargePointResponse = new ChargePointResponse();
+    	
+    	chargePointResponse.setStationId(chargePoint.getStation().getId());
+    	chargePointResponse.setChargePointId(chargePoint.getId());
+    	chargePointResponse.setChargePointIdentifier(chargePoint.getChargePointIdentifier());
+    	chargePointResponse.setCapacity(chargePoint.getCapacity());
+    	chargePointResponse.setType(chargePoint.getType().toString());
+    	chargePointResponse.setStatus(chargePoint.getStatus().toString());
+    	
+    	return chargePointResponse;
+    }
 }
