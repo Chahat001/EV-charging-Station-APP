@@ -8,31 +8,31 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CardRequest {
-	
-	@NotBlank
-    @Size(max = 40)
-	@Valid
-    private String name;
-    
-    @NotBlank
-    @Size(min = 16, max = 16)
-    @Valid
-    private String number;
-   
-    @NotNull
-    @Min(1)
-    @Max(12)
-    @Valid
-    private int expMonth;
-    
-    @NotNull
-    @Valid
-    private int expYear;
 
-    @NotNull
-    @Valid
-    private Long userId;
-    
+	@NotBlank
+	@Size(max = 40)
+	@Valid
+	private String name;
+
+	@NotBlank
+	@Size(min = 16, max = 16)
+	@Valid
+	private String number;
+
+	@NotNull
+	@Min(1)
+	@Max(12)
+	@Valid
+	private int expMonth;
+
+	@NotNull
+	@Valid
+	private int expYear;
+
+	@NotNull
+	@Valid
+	private Long userId;
+
 	public Long getUserId() {
 		return userId;
 	}
