@@ -111,4 +111,19 @@ public void setTransId(long transId) {
 			
 }
 
+public String getStartTime()
+{
+	return this.startTime;
+}
+
+public String getEndTime()
+{
+	return this.endTime;
+}
+
+public String getTotalTime()
+{
+	return this.totalTime;
+}
+
 }

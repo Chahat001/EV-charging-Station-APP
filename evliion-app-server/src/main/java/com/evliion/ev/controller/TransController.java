@@ -49,16 +49,36 @@ public class TransController {
 	    
 	    @Autowired
 	    private TransService transService;
-	
+
+	//--------------------- Create Transaction-------------------------------//
 	@GetMapping("/v1/transaction")
 	public @ResponseBody String postTrans(@RequestBody Transaction transaction)
 	{
         boolean success = transService.createTrans(transaction);
-
+ 
+       
 		  if(success)
 			return "{\"success\": \"true\", \"transactionId\": " + transaction.getTransId() + " \"message\": \"Transaction created successfully\" }";
 		  else
 			return "{\"success\": \"false\", \"message\": \"Failed creating transaction. Please try after some time\" }";
+	}
+	
+	//----------------------Retrieve Single Transaction---------------------------//
+    @GetMapping("/v1/transaction{transactionId}")
+	public @ResponseBody String getTrans(@PathVariable("transactionId") long id)
+	{
+    	if(transRepository.existsById(id))//transaction does exits in data base
+    	{
+    		return transService.getTransDetails(id);
+    	}
+    	else
+    	{
+    		return "{" +
+    		     	"\"success\": \"false\"," + 
+    			  "\"message\": \"Failed fetching transaction. Please try after some time\" " +
+    			 "}";
+
+    	}		
 	}
 				
 }

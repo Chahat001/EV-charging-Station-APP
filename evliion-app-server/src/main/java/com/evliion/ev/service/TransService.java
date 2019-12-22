@@ -1,5 +1,7 @@
 package com.evliion.ev.service;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +28,54 @@ public class TransService {
 	    
 	    @Autowired 
 	    private TransRepository transRepository;
+	    
+	    @Autowired 
+	    private ChargePointRepository chargePointRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(PollService.class);
 
+    //--------------------------------------- save valid transaction to database----------------------//
 	public boolean createTrans(Transaction transaction)
 	{
 	     long userId = transaction.getUserId();
-	     if(userRepository.existsById(userId))
+	     long stationId = transaction.getStationId();
+	     if(userRepository.existsById(userId) && chargePointRepository.existsById(stationId))
 	     {
 			transRepository.saveAndFlush(transaction);
 	    	 return true;
 	     }
 	     return false;
+	}
+	
+	//---------------------------------------- return transaction response-----------------------------//
+	public String getTransDetails(long id)
+	{
+		Transaction transaction = transRepository.getOne(id);
+		Optional<Station> stationMayNull = chargePointRepository.getStation(transaction.getStationId());
+		Vehicle vehicle = vehicleRepository.getOne(transaction.getVehicleId());	
+		Station station = stationMayNull.get();
+		 
+	
+		return "{"+
+		        "\"transactionId\" : " + id + "," +
+		       // "\"status\" :  \"complete\","  +
+		      //  "\"totalCost\" : 
+		         "\"userId\": "+ transaction.getUserId() + "," +
+		         "\"stationName\" : " + station.getName() + "," + 
+		         "\"vehicleDetails\" : " +
+		          "{" +
+		         		"\"make\" : " + vehicle.getMake() + "," + 
+		         		"\"model\" : " + vehicle.getModel() + 
+		           "}" + "," +
+		         "\"slotDuration\" : " + 
+		           "{"+
+		           		"\"startTime\" : " + transaction.getStartTime() + "," +
+		           		"\"endTime\" : " + transaction.getEndTime() + ","  +
+						"\"totalTime\" : " + transaction.getTotalTime() + ","  + 
+		           		// "\"unitsConsumed\" : 
+					"}" ;
+		           	         
+		
 	}
 	
 }
